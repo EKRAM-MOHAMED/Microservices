@@ -1,1 +1,48 @@
 <paste log output from Kubernetes-mediated prediction, here>
+
+(.devops) ec2-user:~/environment/Microservices (master) $ ./run_kubernetes.sh 
+error: failed to create deployment: deployments.apps "udacity2" already exists
+Error from server (AlreadyExists): services "udacity2" already exists
+NAME                        READY   STATUS    RESTARTS   AGE
+udacity2-8488c6f6cf-qlps2   1/1     Running   0          5s
+Forwarding from 127.0.0.1:8000 -> 2000
+Forwarding from [::1]:8000 -> 2000
+Handling connection for 8000
+python app.py
+Handling connection for 8000
+
+(.devops) ec2-user:~/environment/Microservices (master) $ kubectl get pods
+NAME                        READY   STATUS    RESTARTS   AGE
+udacity2-8488c6f6cf-qlps2   1/1     Running   0          10m
+
+(.devops) ec2-user:~/environment/Microservices (master) $ kubectl logs udacity2-8488c6f6cf-qlps2
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:2000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 184-429-770
+[2021-09-08 09:00:04,445] INFO in app: JSON payload: 
+{'CHAS': {'0': 0}, 'RM': {'0': 6.575}, 'TAX': {'0': 296.0}, 'PTRATIO': {'0': 15.3}, 'B': {'0': 396.9}, 'LSTAT': {'0': 4.98}}
+[2021-09-08 09:00:04,519] INFO in app: Inference payload DataFrame: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2021-09-08 09:00:04,570] INFO in app: Scaling Payload: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2021-09-08 09:00:04,597] INFO in app: PREDICTION: [20.35373177134412]
+127.0.0.1 - - [08/Sep/2021 09:00:04] "POST /predict HTTP/1.1" 200 -
+[2021-09-08 09:01:30,681] INFO in app: JSON payload: 
+{'CHAS': {'0': 0}, 'RM': {'0': 6.575}, 'TAX': {'0': 296.0}, 'PTRATIO': {'0': 15.3}, 'B': {'0': 396.9}, 'LSTAT': {'0': 4.98}}
+[2021-09-08 09:01:30,693] INFO in app: Inference payload DataFrame: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2021-09-08 09:01:30,704] INFO in app: Scaling Payload: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2021-09-08 09:01:30,707] INFO in app: PREDICTION: [20.35373177134412]
+127.0.0.1 - - [08/Sep/2021 09:01:30] "POST /predict HTTP/1.1" 200 -
+
