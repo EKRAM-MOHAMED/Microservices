@@ -1,4 +1,4 @@
-<include a CircleCI status badge, here>
+
 
 [![CircleCI](https://circleci.com/gh/EKRAM-MOHAMED/Microservices/tree/master.svg?style=svg)](https://circleci.com/gh/EKRAM-MOHAMED/Microservices/tree/master)
 
@@ -42,3 +42,73 @@ You can find a detailed [project rubric, here](https://review.udacity.com/#!/rub
 * Setup and Configure Kubernetes locally
 * Create Flask app in Container
 * Run via kubectl
+
+### Tasks:
+1) Complete Dockerfile:
+    * Specify python image
+    * Create a working directory
+    * Copy source code (app.py) to working directory
+    * Install packages from requirements.txt (Independencies) (make install)
+    * Expose port 2000 (80 not working for me)
+    * Run app.py at container launch
+    $ make linting
+   
+    %%% See Screenshot (Task-1) %%
+    
+    
+2) Run a Container & Make a Prediction
+    * Build the docker image from the Dockerfile
+    * List the created docker images
+    * Run the containerized Flask app; publish the container’s port (2000) to a host port (8000).
+    
+    ** Run the container using the run_docker.sh
+    $ ./run_docker.sh
+    
+    ** After running the container (docker app) we can able to run the prediction using the make_prediction.sh script:
+    $ ./make_prediction.sh
+    
+      %%% See Screenshot (Task-2.1) & (Task-2.2) %%%
+    
+3) Improve Logging & Save Output
+    * Add a prediction log statement in docker_out.sh
+    * Run the container and make a prediction to check the logs (./run_docker.sh)
+    
+    $ docker ps
+    
+    %%% See Screenshot (Task-3.1) & (Task-3.2) %%%
+    
+4)  Upload the Docker Image
+    * Login to docker hub account
+    * Build the docker container with  (docker build --tag=udacity2 .)
+    * Define a dockerpath which is <docker_hub_username>/<project_name> e.g: ekram321/Microservices
+    * Authenticate and tag image
+    * Push your docker image to the dockerpath
+    
+    $ ./upload_docker.sh
+    
+     %%% See Screenshot (Task-4) %%%
+     
+5)  Configure Kubernetes to Run Locally
+    * Install minikube && kubectl
+     %%% See Screenshot (Task-5.1) & (Task-5.2) %%%
+
+6) Deploy with Kubernetes and Save Output Logs
+    * Define a dockerpath which will be <docker_hub_username>/<project_name> (ekram321/microservices)
+    * Run docker container with kubectl; (kubectl create deployment udacity2 --image=$dockerpath --port=8000)
+    * List kubernetes pods (kubectl get pods)
+    * Forward the container port to a host port (kubectl port-forward deployment/udacity2 8000:2000)
+    
+    & ./run_kubernetes.sh
+    
+    %%% See Screenshot (Task-6.1) & (Task-6.2) %%%
+    
+7) Delete Cluster
+    * stop the kubernetes cluster with (minikube stop)
+    * Delete the kubernetes cluster  (minikube delete)
+    %%% See Screenshot (Task-7) %%%
+    
+8) CircleCI Integration
+    * Login to CircleCi account
+    * create .circleci/config.yml and configure it
+    * Add a status badge using this [![CircleCI](https://circleci.com/gh/EKRAM-MOHAMED/Microservices/tree/master.svg?style=svg)](https://circleci.com/gh/EKRAM-MOHAMED/Microservices/tree/master)
+    
